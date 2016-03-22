@@ -1,4 +1,5 @@
-package Lesson2;
+package Lesson4;
+
 
 public enum TankColor {
     BLACK(0), DARK_GREEN(1), RED(2), YELLOW(3), BROWN(4), BLUE(5), DARK_BLUE(6),

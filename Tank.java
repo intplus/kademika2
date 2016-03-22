@@ -1,62 +1,84 @@
-package Lesson2;
+package Lesson4;
 
 public class Tank {
-	private int crew;
-	private int maxSpeed;
-	private String name;
-	private TankColor color;
+
+	private int x;
+	private int y;
+	public int direction;
+	private ActionField af;
+	private BattleField bf;
+	public int STEP = 1;
+	public int SPEED = 5;
 	
-	public Tank(TankColor color, int crew, int maxSpeed) {
-		this.color = color;
-		this.crew = crew;
-		this.maxSpeed = maxSpeed;	
+	public void setX(int x) {
+		this.x = x;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	final public int UP = 1;
+	final public int DOWN = 2;
+	final public int LEFT = 3;
+	final public int RIGHT = 4;
+	
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	public Tank(ActionField af, BattleField bf) {
+		this(af, bf, 128, 512, 1);
+	}
+	public Tank(ActionField af, BattleField bf, int x, int y, int direction) {
+		this.af = af;
+		this.bf = bf;
+		this.x = x;
+		this.y = y;
+		this.direction = direction;
+	}
+	
+	void turn(int direction) throws Exception {
+		this.direction = direction;
+		af.processTurn(this);
+	}
+
+	void move() throws Exception {
+		af.processMove(this);
+	}
+
+	void fire() throws Exception {
+		Bullet b = new Bullet((x + 25), (y + 25), direction);
+		af.processFire(b);
+	}
+	
+	public int getSpeed() {
+		return SPEED;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public int getDirection() {
+		return direction;
+	}
+
+	public void moveRandom() throws Exception {
 		
 	}
-	public Tank() {
-		this(TankColor.BLACK, 3, 60);
-	}
-	public Tank(int crew) {
-		this.crew = crew;
-	}
-	
-	public void move(String dir) {
-		System.out.println(this.getName() + " move " + dir);
+	public void moveToQuadrant(int v, int h) throws Exception {
 		
 	}
-
-	public String getName() {
-		return name;
+	public void clean() throws Exception {
+		
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void updateX (int x) {
+		this.x += x;
 	}
-
-	public TankColor getColor() {
-		return color;
+	public void updateY (int y) {
+		this.y += y;
 	}
-
-	public void setColor(TankColor color) {
-		this.color = color;
-	}
-
-	public int getCrew() {
-		return crew;
-	}
-	public void setCrew(int crew) {
-		this.crew = crew;
-	}
-	public int getMaxSpeed() {
-		return maxSpeed;
-	}
-	public void setMaxSpeed(int maxSpeed) {
-		this.maxSpeed = maxSpeed;
-	}
-	@Override
-	public String toString() {
-	    return ("Tank color = " + this.getColor() + "; Tank crew = " + 
-	    		this.getCrew() + "; Tank maxSpeed = " + this.getMaxSpeed());
-	}
-	
 
 }
